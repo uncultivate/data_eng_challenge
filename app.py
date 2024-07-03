@@ -7,6 +7,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 import pandas as pd
 import textwrap
 import inspect
+from pytz import timezone
 
 # Database setup
 DATABASE_URL = "sqlite:///submissions.db"
@@ -27,10 +28,15 @@ session = Session()
 st.title("Coding Challenge #1")
 
 # Challenge description
-st.subheader("Description")
-st.write("""
-Welcome to the inaugural ABS Data Engineers coding challenge! We're kicking things off with the Prisoner's Dilemma Game, where your strategic thinking is pitted against your colleagues in a classic scenario of cooperation and betrayal.""")
-st.markdown("[Prisoner's Dilemma on Wikipedia](https://en.wikipedia.org/wiki/Prisoner's_dilemma)")
+c1, c2 = st.columns(2)
+with c1:
+    st.subheader("Description")
+
+    st.write("""
+    Welcome to the inaugural ABS Data Engineers coding challenge! We're kicking things off with the Prisoner's Dilemma Game, where your strategic thinking is pitted against your colleagues in a classic scenario of cooperation and betrayal.""")
+    st.markdown("[Prisoner's Dilemma on Wikipedia](https://en.wikipedia.org/wiki/Prisoner's_dilemma)")
+with c2:
+    st.image('two_prisoners.webp', width=300)
 
 st.subheader("The Game Rules")
 st.write("""
@@ -64,12 +70,13 @@ code = """def my_strategy(history):
 st.code(code, language='python')
 
 st.write("""Your task is to write a Python function that meets the specified requirements. 
-The challenge submission will close on Friday 11/07 at 10 AM EST. The game will be run and broadcast on Teams on Friday, 11/07 at 3 PM EST. Good luck!
+The challenge submission will close on Thursday, 10/07 at 11:59 PM EST. The game will be run and broadcast on Teams on Friday, 11/07 at 3 PM EST. Good luck!
 """)
 
 # Countdown timer
-submission_close_date = datetime.datetime(2024, 7, 10, 23, 59, 59)
-current_time = datetime.datetime.now()
+aest = timezone('Australia/Sydney')
+submission_close_date = aest.localize(datetime.datetime(2024, 7, 10, 23, 59, 59))
+current_time = datetime.datetime.now(aest)
 remaining_time = submission_close_date - current_time
 
 st.sidebar.title("ABS Data Eng")
