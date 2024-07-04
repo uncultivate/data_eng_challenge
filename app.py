@@ -38,7 +38,7 @@ with c2:
 
 st.subheader("The Game Rules")
 st.write("""
-1. Objective: Each contestant will submit a function that decides whether to 'Cooperate' or 'Defect' based on the history of decisions in previous rounds.
+1. Objective: Each contestant will submit ONE function that decides whether to 'Cooperate' or 'Defect' based on the history of decisions in previous rounds.
 2. Rounds: Each matchup consists of 50 rounds where contestants will be paired against each other.
 3. Payoff Matrix:
     - Both Cooperate: 2 points each
