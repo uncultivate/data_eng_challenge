@@ -30,8 +30,6 @@ st.title("Coding Challenge #1")
 # Challenge description
 c1, c2 = st.columns(2)
 with c1:
-    st.subheader("Description")
-
     st.write("""
     Welcome to the inaugural ABS Data Engineers coding challenge! We're kicking things off with the Prisoner's Dilemma Game, where your strategic thinking is pitted against your colleagues in a classic scenario of cooperation and betrayal.""")
     st.markdown("[Prisoner's Dilemma on Wikipedia](https://en.wikipedia.org/wiki/Prisoner's_dilemma)")
