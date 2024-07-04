@@ -68,7 +68,7 @@ code = """def my_strategy(history):
 st.code(code, language='python')
 
 st.write("""Your task is to write a Python function that meets the specified requirements. 
-The challenge submission will close on Thursday, 11/07 at 11:59 PM EST. The game will be run and broadcast on Teams on Friday, 12/07 at 3 PM EST. Good luck!
+The challenge submission will close on Thursday, 11/07 at 11:59 PM AEST. The game will be run and broadcast on Teams on Friday, 12/07 at 3 PM AEST. Good luck!
 """)
 
 # Countdown timer
