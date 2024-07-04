@@ -70,12 +70,12 @@ code = """def my_strategy(history):
 st.code(code, language='python')
 
 st.write("""Your task is to write a Python function that meets the specified requirements. 
-The challenge submission will close on Thursday, 10/07 at 11:59 PM EST. The game will be run and broadcast on Teams on Friday, 11/07 at 3 PM EST. Good luck!
+The challenge submission will close on Thursday, 11/07 at 11:59 PM EST. The game will be run and broadcast on Teams on Friday, 12/07 at 3 PM EST. Good luck!
 """)
 
 # Countdown timer
 aest = timezone('Australia/Sydney')
-submission_close_date = aest.localize(datetime.datetime(2024, 7, 10, 23, 59, 59))
+submission_close_date = aest.localize(datetime.datetime(2024, 7, 11, 23, 59, 59))
 current_time = datetime.datetime.now(aest)
 remaining_time = submission_close_date - current_time
 
