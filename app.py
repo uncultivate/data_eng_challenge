@@ -34,7 +34,7 @@ with c1:
     Welcome to the inaugural ABS Data Engineers coding challenge! We're kicking things off with the Prisoner's Dilemma Game, where your strategic thinking is pitted against your colleagues in a classic scenario of cooperation and betrayal.""")
     st.markdown("[Prisoner's Dilemma on Wikipedia](https://en.wikipedia.org/wiki/Prisoner's_dilemma)")
 with c2:
-    st.image('two_prisoners.webp', width=300)
+    st.image('two_prisoners.webp', width=270)
 
 st.subheader("The Game Rules")
 st.write("""
