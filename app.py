@@ -6,16 +6,34 @@ import textwrap
 import inspect
 from pytz import timezone
 import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
+# if 'entrants' not in st.session_state:
+# Load credentials from Streamlit secrets
+credentials_info = {
+    "type": st.secrets["gcp_service_account"]["type"],
+    "project_id": st.secrets["gcp_service_account"]["project_id"],
+    "private_key_id": st.secrets["gcp_service_account"]["private_key_id"],
+    "private_key": st.secrets["gcp_service_account"]["private_key"],
+    "client_email": st.secrets["gcp_service_account"]["client_email"],
+    "client_id": st.secrets["gcp_service_account"]["client_id"],
+    "auth_uri": st.secrets["gcp_service_account"]["auth_uri"],
+    "token_uri": st.secrets["gcp_service_account"]["token_uri"],
+    "auth_provider_x509_cert_url": st.secrets["gcp_service_account"]["auth_provider_x509_cert_url"],
+    "client_x509_cert_url": st.secrets["gcp_service_account"]["client_x509_cert_url"],
+    "universe_domain": st.secrets["gcp_service_account"]["universe_domain"],
+}
 
-if 'entrants' not in st.session_state:
-    # Connect to Google Sheets
-    gc = gspread.service_account(filename='.streamlit\secrets.json')
-    sh = gc.open("Submissions")
-    # Change the int depending on what month the competition is up to
-    worksheet = sh.get_worksheet(0)
-    entrants = worksheet.col_values(1)
-    st.session_state.entrants = entrants
+# Create the credentials object
+credentials = ServiceAccountCredentials.from_json_keyfile_dict(credentials_info)
+
+# Connect to Google Sheets
+gc = gspread.authorize(credentials)
+sh = gc.open("Submissions")
+# Change the int depending on what month the competition is up to
+worksheet = sh.get_worksheet(0)
+entrants = worksheet.col_values(1)
+st.session_state.entrants = entrants
 
 st.title("Coding Challenge #1")
 
@@ -87,10 +105,6 @@ if remaining_time.total_seconds() > 0:
 
     if st.button("Submit"):
         if name and function_code:
-            gc = gspread.service_account(filename='.streamlit\data-eng-challenge-428904-e2cb1f661e09.json')
-            sh = gc.open("Submissions")
-            # Change the int depending on what month the competition is up to
-            worksheet = sh.get_worksheet(0)
             num_entrants = len(st.session_state.entrants)
             worksheet.update_cell(num_entrants + 1, 1, name)
             worksheet.update_cell(num_entrants + 1, 2, function_code)

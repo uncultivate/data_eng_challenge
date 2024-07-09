@@ -7,7 +7,7 @@ venv/
 env/
 
 # Ignore Streamlit secrets
-.streamlit/secrets.json
+.streamlit/secrets.toml
 
 # Ignore Jupyter Notebook checkpoints
 .ipynb_checkpoints/
