@@ -1,30 +1,22 @@
 import streamlit as st
 import datetime
 import time
-import sqlalchemy
-from sqlalchemy import create_engine, Column, Integer, String, Text
-from sqlalchemy.orm import sessionmaker, declarative_base
 import pandas as pd
 import textwrap
 import inspect
 from pytz import timezone
+import gspread
 
-# Database setup
-DATABASE_URL = "sqlite:///submissions.db"
-Base = declarative_base()
 
-class Submission(Base):
-    __tablename__ = 'submissions'
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=False)
-    function_code = Column(Text, nullable=False)
+if 'entrants' not in st.session_state:
+    # Connect to Google Sheets
+    gc = gspread.service_account(filename='.streamlit\secrets.json')
+    sh = gc.open("Submissions")
+    # Change the int depending on what month the competition is up to
+    worksheet = sh.get_worksheet(0)
+    entrants = worksheet.col_values(1)
+    st.session_state.entrants = entrants
 
-engine = create_engine(DATABASE_URL)
-Base.metadata.create_all(engine)
-Session = sessionmaker(bind=engine)
-session = Session()
-
-# Streamlit app setup
 st.title("Coding Challenge #1")
 
 # Challenge description
@@ -95,57 +87,31 @@ if remaining_time.total_seconds() > 0:
 
     if st.button("Submit"):
         if name and function_code:
-            new_submission = Submission(name=name, function_code=function_code)
-            session.add(new_submission)
-            session.commit()
+            gc = gspread.service_account(filename='.streamlit\data-eng-challenge-428904-e2cb1f661e09.json')
+            sh = gc.open("Submissions")
+            # Change the int depending on what month the competition is up to
+            worksheet = sh.get_worksheet(0)
+            num_entrants = len(st.session_state.entrants)
+            worksheet.update_cell(num_entrants + 1, 1, name)
+            worksheet.update_cell(num_entrants + 1, 2, function_code)
             st.success("Submission successful!")
+
         else:
             st.error("Please provide both name and function code.")
 else:
     st.header("Submissions are now closed.")
 
+
 # Display current entrants
 st.sidebar.divider()
 st.sidebar.header("Current Entrants")
-entrants = session.query(Submission).all()
+for entrant in st.session_state.entrants:
+    st.sidebar.write(f"- {entrant}")
 
-st.sidebar.write("### Entrants List")
-for entrant in entrants:
-    st.sidebar.write(f"- {entrant.name}")
-
+# Contact
 st.sidebar.divider()
 st.sidebar.header("Contact")
-
 st.sidebar.write("Jono Sheahan")
-
-# Admin section
-st.sidebar.divider()
-st.sidebar.header("Admin")
-admin_password = st.sidebar.text_input("Password", type="password")
-
-if admin_password == "charmander":  # Replace with a secure password management system in a real application
-    
-    # Show database entries
-    st.sidebar.subheader("Database Entries")
-    entries = session.query(Submission).all()
-    for entry in entries:
-        st.sidebar.write(f"ID: {entry.id}, Name: {entry.name}")
-        st.sidebar.code(entry.function_code, language='python')
-        
-        # Delete entry button
-        if st.sidebar.button(f"Delete {entry.name}", key=f"delete_{entry.id}"):
-            session.delete(entry)
-            session.commit()
-            st.sidebar.success(f"Deleted entry {entry.name}")
-            st.rerun()
-    
-    # Reset database button
-    if st.sidebar.button("Reset Database"):
-        session.query(Submission).delete()
-        session.commit()
-        st.sidebar.success("Database reset successfully")
-        st.rerun()
-
 
 # Test function
 def test_submitted_function(func_code):
