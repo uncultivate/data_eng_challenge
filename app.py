@@ -31,20 +31,20 @@ credentials = ServiceAccountCredentials.from_json_keyfile_dict(credentials_info)
 gc = gspread.authorize(credentials)
 sh = gc.open("Submissions")
 # Change the int depending on what month the competition is up to
-worksheet = sh.get_worksheet(0)
+worksheet = sh.get_worksheet(1)
 entrants = worksheet.col_values(1)
 st.session_state.entrants = entrants
 
-st.title("Coding Challenge #1")
+st.title("Coding Challenge #2")
 
 # Challenge description
 c1, c2 = st.columns(2)
 with c1:
     st.write("""
-    Welcome to the inaugural ABS Data Engineers coding challenge! We're kicking things off with the Prisoner's Dilemma Game, where your strategic thinking is pitted against your colleagues in a classic scenario of cooperation and betrayal.""")
-    st.markdown("[Prisoner's Dilemma on Wikipedia](https://en.wikipedia.org/wiki/Prisoner's_dilemma)")
+    Step right up and plant the seeds of your success with Tulip Coin! Who wouldn't want to invest in the next big thing that combines the rich history of 17th century Holland with the endless hype of the digital age? With its limited supply and radiant hues, Tulip Coin is your ticket to a blooming fortune! Join the garden of savvy investors who see the potential in this floral commodity on a rocket to the moon! 🌷💰""")
+    st.markdown("[Tulip Mania on Wikipedia](https://en.wikipedia.org/wiki/Tulip_mania)")
 with c2:
-    st.image('two_prisoners.webp', width=270)
+    st.image('assets/img/tulip_coin.jpg', width=270)
 
 st.subheader("The Game Rules")
 st.write("""
