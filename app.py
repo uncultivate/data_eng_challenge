@@ -97,12 +97,12 @@ else:
     st.sidebar.write("Submissions Closed")
 
 # Submission form
-placeholder1 = """def buy_high_sell_low(history):
-  if history['transactions'].iloc[-1] > history['transactions'].iloc[-2]:
-    return 'buy', 0.35
-  if history['transactions'].iloc[-1] < history['transactions'].iloc[-2]
-    return 'sell', 0.35
-  return 'hold', '0.0'"""
+placeholder1 = """def my_strategy(history):
+    # Example strategy: buy low sell high
+    if not history.empty:
+        # Implement your strategy based on the history DataFrame
+        pass
+    return 'buy', 0.2"""
 if remaining_time.total_seconds() > 0:
     st.subheader("Submit your code")
     name = st.text_input("Name")
