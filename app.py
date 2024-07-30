@@ -64,8 +64,8 @@ The DataFrame history will have the following columns:
 - minutes_remaining (int): Time remaining until close
          
 Your function should return a tuple with the following components: 
-         - Transaction decision (str): 'buy', 'sell' or 'hold' and;
-         - Decimal proportion (float): If 'buy', the proportion of your money to buy Tulip Coin, or if 'sell', the proportion of your Tulip Coins to sell. If hold, the proportion is disregarded.
+- Transaction decision (str): 'buy', 'sell' or 'hold' and;
+- Decimal proportion (float): If 'buy', the proportion of your money to buy Tulip Coin, or if 'sell', the proportion of your Tulip Coins to sell. If hold, the proportion is disregarded.
          """)
 st.subheader("Submission Template")
 st.write("Below is a template you can use to create your function. Replace the placeholder logic with your strategy.")
