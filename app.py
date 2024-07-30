@@ -48,47 +48,48 @@ with c2:
 
 st.subheader("The Game Rules")
 st.write("""
-1. Objective: Each contestant will submit ONE function that decides whether to 'Cooperate' or 'Defect' based on the history of decisions in previous rounds.
-2. Rounds: Each matchup consists of 50 rounds where contestants will be paired against each other.
-3. Payoff Matrix:
-    - Both Cooperate: 2 points each
-    - One Cooperates, One Defects: Defector gets 3 points, Cooperator gets 0 points
-    - Both Defect: 1 point each
+1. Mission: With starting capital of $1000, each contestant will submit ONE function that decides whether to 'buy', 'sell' or 'hold' based on the history of prices in previous transactions.
+2. Duration: Contestants will be chosen randomly to make a trade. Trading will last for 1 hour.
+3. Objective: The contestant with the highest total assets value at close wins! (total assets = dollars + tulip coins)
 4. Mystery Entrants:
-    - Three mystery contestants have been added to the roster. Can you deduce their strategy?""")
+    - Three mystery contestants have been added to the roster. They are richer than you 💰💰💰""")
 
 st.subheader("Function Requirements")
-st.write("""Your function should take a single parameter: a pandas DataFrame containing the history of decisions made by you and your opponent.
+st.write("""Your function should take a single parameter: a pandas DataFrame containing the history of prices in previous transactions.
 
 The DataFrame history will have the following columns:
 
-- Round: The round number (starting from 1)
-- Opponent_Decision: The opponent's decision in that round ('Cooperate' or 'Defect')
-- My_Decision: Your decision in that round ('Cooperate' or 'Defect')
-Your function should return either 'Cooperate' or 'Defect'.""")
+- transaction (int): The transaction count (starting from 1)
+- price_history (float): The history of prices at each transaction
+- minutes_remaining (int): Time remaining until close
+         
+Your function should return a tuple with the following components: 
+         - Transaction decision (str): 'buy', 'sell' or 'hold' and;
+         - Decimal proportion (float): If 'buy', the proportion of your money to buy Tulip Coin, or if 'sell', the proportion of your Tulip Coins to sell. If hold, the proportion is disregarded.
+         """)
 st.subheader("Submission Template")
 st.write("Below is a template you can use to create your function. Replace the placeholder logic with your strategy.")
 
 code = """def my_strategy(history):
-    # Example strategy: always cooperate
+    # Example strategy: buy low sell high
     if not history.empty:
         # Implement your strategy based on the history DataFrame
         pass
-    return 'Cooperate'"""
+    return 'buy', 0.2"""
 st.code(code, language='python')
 
 st.write("""Your task is to write a Python function that meets the specified requirements. 
-The challenge submission will close on Thursday, 11/07 at 11:59 PM AEST. The game will be run and broadcast on Teams on Friday, 12/07 at 3 PM AEST. Good luck!
+The challenge submission will close on Thursday, 08/08 at 11:59 PM AEST. The game will be run and broadcast on Teams on Friday, 09/08 at 3 PM AEST. Good luck!
 """)
 
 # Countdown timer
 aest = timezone('Australia/Sydney')
-submission_close_date = aest.localize(datetime.datetime(2024, 7, 11, 23, 59, 59))
+submission_close_date = aest.localize(datetime.datetime(2024, 8, 8, 23, 59, 59))
 current_time = datetime.datetime.now(aest)
 remaining_time = submission_close_date - current_time
 
 st.sidebar.title("ABS Data Eng")
-st.sidebar.header("Coding Challenge #1")
+st.sidebar.header("Coding Challenge #2")
 if remaining_time.total_seconds() > 0:
     st.sidebar.write(f"Submissions close in {remaining_time.days} days, {remaining_time.seconds // 3600} hours and "
                      f"{(remaining_time.seconds // 60) % 60} minutes.")
@@ -96,8 +97,12 @@ else:
     st.sidebar.write("Submissions Closed")
 
 # Submission form
-placeholder1 = """def nice_prisoner(history):
-  return 'Cooperate'"""
+placeholder1 = """def buy_high_sell_low(history):
+  if history['transactions'].iloc[-1] > history['transactions'].iloc[-2]:
+    return 'buy', 0.35
+  if history['transactions'].iloc[-1] < history['transactions'].iloc[-2]
+    return 'sell', 0.35
+  return 'hold', '0.0'"""
 if remaining_time.total_seconds() > 0:
     st.subheader("Submit your code")
     name = st.text_input("Name")
@@ -137,26 +142,34 @@ def test_submitted_function(func_code):
         try:
             # Create a sample DataFrame
             data = {
-                'Round': [1, 2, 3],
-                'Opponent_Decision': ['Cooperate', 'Defect', 'Cooperate'],
-                'My_Decision': ['Cooperate', 'Cooperate', 'Defect']
+                'transaction': [1, 2, 3],
+                'price_history': [0.1, 0.3, 0.2],
+                'minutes_remaining': [30, 29, 29]
             }
             df = pd.DataFrame(data)
             
             # Run the function and check output
             result = test_func(df)
-            if result in ['Defect', 'Cooperate']:
-                return f"Function '{func_name}' passed all tests!"
-            else:
-                return f"Function '{func_name}' did not return 'Defect' or 'Cooperate'."
+    
+            # Check if the result is a tuple
+            assert isinstance(result, tuple), "The result should be a tuple"
+            
+            # Check if the first element of the tuple is 'buy', 'sell', or 'hold'
+            assert result[0] in ['buy', 'sell', 'hold'], "The first element should be 'buy', 'sell', or 'hold'"
+            
+            # Check if the second element of the tuple is a float
+            assert isinstance(result[1], float), "The second element should be a float"
+            
+            # Check if the second element of the tuple is between 0.0 and 1.0
+            assert 0.0 <= result[1] <= 1.0, "The second element should be between 0.0 and 1.0"
         except Exception as e:
             return f"Test case failed with function '{func_name}': {e}"
     else:
         return "No function found in the provided code."
 
 # Test the submitted function
-placeholder2 = """def nasty_prisoner(history):
-  return 'Defect'"""
+placeholder2 = """def always_buy(history):
+  return 'buy', 0.15"""
 st.subheader("Optional: Test Your Function")
 test_code = st.text_area("Paste the function code you want to test", placeholder=placeholder2)
 if st.button("Run Tests"):
