@@ -49,7 +49,7 @@ with c2:
 st.subheader("The Game Rules")
 st.write("""
 1. Mission: With starting capital of $1000, each contestant will submit ONE function that decides whether to 'buy', 'sell' or 'hold' based on the history of prices in previous transactions.
-2. Duration: Contestants will be chosen randomly to make a trade. Trading will last for 1 hour.
+2. Duration: Contestants will be chosen every five seconds at random to make a trade. Trading will last for 1 hour.
 3. Objective: The contestant with the highest total assets value at close wins! (total assets = dollars + tulip coins)
 4. Mystery Entrants:
     - Three mystery contestants have been added to the roster. They are richer than you 💰💰💰""")
