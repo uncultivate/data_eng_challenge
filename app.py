@@ -162,7 +162,7 @@ def test_submitted_function(func_code):
             
             # Check if the second element of the tuple is between 0.0 and 1.0
             assert 0.0 <= result[1] <= 1.0, "The second element should be between 0.0 and 1.0"
-            st.write('Function passed all unit tests!')
+            return 'Function passed all unit tests!'
         except Exception as e:
             return f"Test case failed with function '{func_name}': {e}"
     else:
