@@ -8,6 +8,11 @@ from pytz import timezone
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
+st.set_page_config(
+    page_title="Data Eng Challenge",
+    page_icon="📈",
+)
+
 # if 'entrants' not in st.session_state:
 # Load credentials from Streamlit secrets
 credentials_info = {
@@ -35,7 +40,7 @@ worksheet = sh.get_worksheet(1)
 entrants = worksheet.col_values(1)
 st.session_state.entrants = entrants
 
-st.title("Coding Challenge #2")
+st.title("Data Engineers' Coding Challenge #2")
 
 # Challenge description
 c1, c2 = st.columns(2)
@@ -44,14 +49,15 @@ with c1:
     Step right up and plant the seeds of your success with Tulip Coin! Who wouldn't want to invest in the next big thing that combines the rich history of 17th century Holland with the endless hype of the digital age? With its limited supply and radiant hues, Tulip Coin is your ticket to a blooming fortune! Join the garden of savvy investors who see the potential in this floral commodity on a rocket to the moon! 🌷💰""")
     st.markdown("[Tulip Mania on Wikipedia](https://en.wikipedia.org/wiki/Tulip_mania)")
 with c2:
-    st.image('assets/img/tulip_coin.jpg', width=270)
+    st.image('assets/img/tulip_coin.jpg', width=330)
 
 st.subheader("The Game Rules")
 st.write("""
-1. Mission: With starting capital of $1000, each contestant will submit ONE function that decides whether to 'buy', 'sell' or 'hold' based on the history of prices in previous transactions.
+1. Mission: Each contestant will submit ONE function that decides whether to 'buy', 'sell' or 'hold' based on the history of prices in previous transactions.
 2. Duration: Contestants will be chosen every five seconds at random to make a trade. Trading will last for 1 hour.
-3. Objective: The contestant with the highest total assets value at close wins! (total assets = dollars + tulip coins)
-4. Mystery Entrants:
+3. Initial state: Each contestant starts off with \$1000 that can be invested in Tulip Coin. The initial value of Tulip Coin is \$0.10.
+4. Objective: The contestant with the highest total assets value at close wins! (total assets = dollars + tulip coins).
+5. Mystery whales:
     - Three mystery contestants have been added to the roster. They are richer than you 💰💰💰""")
 
 st.subheader("Function Requirements")
