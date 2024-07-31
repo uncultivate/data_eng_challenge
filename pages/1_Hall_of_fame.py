@@ -1,5 +1,5 @@
 import streamlit as st
-st.set_page_config(page_title="Plotting Demo", page_icon="🏆")
+st.set_page_config(page_title="Hall of Fame", page_icon="🏆")
 
 st.markdown("# Hall of Fame")
 st.divider()
