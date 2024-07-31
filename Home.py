@@ -56,7 +56,7 @@ st.subheader("The Game Rules")
 st.write("""
 1. Mission: Each contestant will submit ONE function that decides whether to 'buy', 'sell' or 'hold' based on the history of prices in previous transactions.
 2. Duration: Contestants will be chosen every five seconds at random to make a trade. Trading will last for 1 hour.
-3. Initial state: Each contestant starts off with /$1000 that can be invested in Tulip Coin. The initial value of Tulip Coin is /$0.10.
+3. Initial state: Each contestant starts off with \$1000 that can be invested in Tulip Coin. The initial value of Tulip Coin is \$0.10.
 4. Objective: The contestant with the highest total assets value at close wins! (total assets = dollars + tulip coins).
 5. Mystery whales:
     - Three mystery contestants have been added to the roster. They are richer than you 💰💰💰""")
