@@ -37,7 +37,7 @@ credentials = ServiceAccountCredentials.from_json_keyfile_dict(credentials_info)
 gc = gspread.authorize(credentials)
 sh = gc.open("Submissions")
 # Change the int depending on what month the competition is up to
-worksheet = sh.get_worksheet(1)
+worksheet = sh.get_worksheet(2)
 entrants = worksheet.col_values(1)
 st.session_state.entrants = entrants
 
