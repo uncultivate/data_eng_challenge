@@ -48,11 +48,10 @@ c1, c2 = st.columns(2)
 with c1:
     st.write("""
     Management have just announced that a new regional departmental office is being established. Following negotiations with the developers of the new site, it has emerged that there is an elevator discount of 10% on offer if the building's lift logic is created internally, rather than being outsourced to the elevator company.   
-
-    Given the cost savings, ABS Data Engineers have been assigned the UpLift Challenge - to create a function that most efficiently delivers people through the new building!         
-    ⏬🚻⏫""")
+""")
 with c2:
     st.image('assets/img/lift.jpg', width=330)
+st.write("Given the cost savings, ABS Data Engineers have been assigned the UpLift Challenge - to create a function that most efficiently delivers people through the new building! ⏬🚻⏫")
 
 st.subheader("The Challenge Rules")
 url = "https://github.com/uncultivate/elevator-master"
