@@ -99,8 +99,6 @@ else:
 
 # Submission form
 placeholder1 = """def baseline_algorithm(timestamp, elev_pop, floor_population, floors, elevator_floor, t_floor):
-    # Simple logic: If the lift is at the bottom floor, head upwards. If the lift is at the 
-    top floor, head back down. If in the middle, use the previous direction
 
     if elevator_floor == 1:
         return floors
