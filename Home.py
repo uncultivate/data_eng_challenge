@@ -41,62 +41,57 @@ worksheet = sh.get_worksheet(1)
 entrants = worksheet.col_values(1)
 st.session_state.entrants = entrants
 
-st.title("Data Engineers' Coding Challenge #2: Tulip Coin")
+st.title("Data Engineers' Coding Challenge #3: The UpLift Challenge")
 
 # Challenge description
 c1, c2 = st.columns(2)
 with c1:
     st.write("""
-    Step right up and plant the seeds of your success with Tulip Coin! Who wouldn't want to invest in the next big thing that combines the rich history of 17th century Holland with the endless hype of the digital age? With its limited supply and radiant hues, Tulip Coin is your ticket to a blooming fortune! Join the garden of savvy investors who see the potential in this floral commodity on a rocket to the moon! 🌷💰""")
-    st.markdown("[Tulip Mania on Wikipedia](https://en.wikipedia.org/wiki/Tulip_mania)")
-with c2:
-    st.image('assets/img/tulip_coin.jpg', width=330)
+    Management have just announced that a new regional departmental office is being established. Following negotiations with the developers of the new site, it has emerged that there is an elevator discount of 10% on offer if the building's lift logic is created internally, rather than being outsourced to the elevator company.   
 
-st.subheader("The Game Rules")
-st.write("""
-1. Mission: Each contestant will submit ONE function that decides whether to 'buy', 'sell' or 'hold' based on the history of prices in previous transactions.
-2. Duration: Contestants will be chosen every five seconds at random to make a trade. Trading will last for 1 hour.
-3. Initial state: Each contestant starts off with \$1000 that can be invested in Tulip Coin. The initial value of Tulip Coin is \$0.10.
-4. Objective: The contestant with the highest total assets value at close wins! (total assets = dollars + tulip coins).
-5. Mystery whales:
-    - Three mystery contestants have been added to the roster. They are richer than you 💰💰💰""")
+    Given the cost savings, ABS Data Engineers have been assigned the UpLift Challenge - to create a function that most efficiently delivers people through the new building!         
+    ⏬🚻⏫""")
+with c2:
+    st.image('assets/img/lift.jpg', width=330)
+
+st.subheader("The Challenge Rules")
+url = "https://github.com/uncultivate/elevator-master"
+st.write("1. Mission: Each contestant will submit ONE function that determines how the building's elevator should behave, based on several parameters.")
+st.write("2. Simulation: Contestants should first access and run the [elevator simulation code repo](%s). This repo contains code to generate simulated building entries & exits, as well as simulation code to run your function, and visualise results" % url)
+st.write("3. Challenge parameters: Test your function with a variety of parameters. The challenge will be run three times with different time windows, numbers of people and numbers of floors.")
+st.write("4. Objective: The contestant with the lowest average time across the three runs will be declared the winner.")
+st.write("5. Example function: There is an example 'baseline_algorithm' included in the run_lifts notebook. Make sure your function can outperform this!")
 
 st.subheader("Function Requirements")
-st.write("""Your function should take a single parameter: a pandas DataFrame containing the history of prices in previous transactions.
+st.write("Test your function using a local jupyter notebooks instance (can enable animations) or in Google Colab (cannot enable animations). Once you are satisfied, submit your code below.") 
 
-The DataFrame history will have the following columns:
-
-- transaction (int): The transaction count (starting from 1)
-- price_history (float): The history of prices at each transaction
-- minutes_remaining (int): Time remaining until close
-         
-Your function should return a tuple with the following components: 
-- Transaction decision (str): 'buy', 'sell' or 'hold' and;
-- Decimal proportion (float): If 'buy', the proportion of your money to buy Tulip Coin, or if 'sell', the proportion of your Tulip Coins to sell. If hold, the proportion is disregarded.
-         """)
 st.subheader("Submission Template")
 st.write("Below is a template you can use to create your function. Replace the placeholder logic with your strategy.")
 
-code = """def my_strategy(history):
-    # Example strategy: buy low sell high
-    if not history.empty:
-        # Implement your strategy based on the history DataFrame
-        pass
-    return 'buy', 0.2"""
+code = """def baseline_algorithm(timestamp, elev_pop, floor_population, floors, elevator_floor, t_floor):
+    # Simple logic: If the lift is at the bottom floor, head upwards. If the lift is at the 
+    top floor, head back down. If in the middle, use the previous direction
+
+    if elevator_floor == 1:
+        return floors
+    elif elevator_floor == floors:
+        return 1
+
+    return t_floor"""
 st.code(code, language='python')
 
 st.write("""Your task is to write a Python function that meets the specified requirements. 
-The challenge submission will close on Thursday, 08/08 at 11:59 PM AEST. The game will be run and broadcast on Teams on Friday, 09/08 at 3 PM AEST. Good luck!
+The challenge submission will close on Thursday, 05/09 at 11:59 PM AEST. The game will be run and broadcast on Teams on Friday, 06/09 at 3 PM AEST. Good luck!
 """)
 
 # Countdown timer
 aest = timezone('Australia/Sydney')
-submission_close_date = aest.localize(datetime.datetime(2024, 8, 8, 23, 59, 59))
+submission_close_date = aest.localize(datetime.datetime(2024, 9, 5, 23, 59, 59))
 current_time = datetime.datetime.now(aest)
 remaining_time = submission_close_date - current_time
 
 st.sidebar.title("ABS Data Eng")
-st.sidebar.header("Coding Challenge #2")
+st.sidebar.header("Coding Challenge #3")
 if remaining_time.total_seconds() > 0:
     st.sidebar.write(f"Submissions close in {remaining_time.days} days, {remaining_time.seconds // 3600} hours and "
                      f"{(remaining_time.seconds // 60) % 60} minutes.")
@@ -104,22 +99,29 @@ else:
     st.sidebar.write("Submissions Closed")
 
 # Submission form
-placeholder1 = """def my_strategy(history):
-    # Example strategy: buy low sell high
-    if not history.empty:
-        # Implement your strategy based on the history DataFrame
-        pass
-    return 'buy', 0.2"""
+placeholder1 = """def baseline_algorithm(timestamp, elev_pop, floor_population, floors, elevator_floor, t_floor):
+    # Simple logic: If the lift is at the bottom floor, head upwards. If the lift is at the 
+    top floor, head back down. If in the middle, use the previous direction
+
+    if elevator_floor == 1:
+        return floors
+    elif elevator_floor == floors:
+        return 1
+
+    return t_floor"""
 if remaining_time.total_seconds() > 0:
     st.subheader("Submit your code")
     name = st.text_input("Name")
+    email = st.text_input("Email (optional)", help="Get notified of new challenges and get invited to results livestreams")
     function_code = st.text_area("Function Code (Paste your Python code here)", placeholder=placeholder1)
 
     if st.button("Submit"):
         if name and function_code:
             num_entrants = len(st.session_state.entrants)
             worksheet.update_cell(num_entrants + 1, 1, name)
-            worksheet.update_cell(num_entrants + 1, 2, function_code)
+            if email:
+                worksheet.update_cell(num_entrants + 1, 2, email)
+            worksheet.update_cell(num_entrants + 1, 3, function_code)
             st.success("Submission successful!")
 
         else:
@@ -138,48 +140,3 @@ for entrant in st.session_state.entrants:
 st.sidebar.divider()
 st.sidebar.header("Contact")
 st.sidebar.write("Jono Sheahan")
-
-# Test function
-def test_submitted_function(func_code):
-    local_vars = {}
-    exec(textwrap.dedent(func_code), {}, local_vars)
-    functions = {name: obj for name, obj in local_vars.items() if inspect.isfunction(obj)}
-    if functions:
-        func_name, test_func = next(iter(functions.items()))
-        try:
-            # Create a sample DataFrame
-            data = {
-                'transaction': [1, 2, 3],
-                'price_history': [0.1, 0.3, 0.2],
-                'minutes_remaining': [30, 29, 29]
-            }
-            df = pd.DataFrame(data)
-            
-            # Run the function and check output
-            result = test_func(df)
-    
-            # Check if the result is a tuple
-            assert isinstance(result, tuple), "The result should be a tuple"
-            
-            # Check if the first element of the tuple is 'buy', 'sell', or 'hold'
-            assert result[0] in ['buy', 'sell', 'hold'], "The first element should be 'buy', 'sell', or 'hold'"
-            
-            # Check if the second element of the tuple is a float
-            assert isinstance(result[1], float), "The second element should be a float"
-            
-            # Check if the second element of the tuple is between 0.0 and 1.0
-            assert 0.0 <= result[1] <= 1.0, "The second element should be between 0.0 and 1.0"
-            return 'Function passed all unit tests!'
-        except Exception as e:
-            return f"Test case failed with function '{func_name}': {e}"
-    else:
-        return "No function found in the provided code."
-
-# Test the submitted function
-placeholder2 = """def always_buy(history):
-  return 'buy', 0.15"""
-st.subheader("Optional: Test Your Function")
-test_code = st.text_area("Paste the function code you want to test", placeholder=placeholder2)
-if st.button("Run Tests"):
-    result = test_submitted_function(test_code)
-    st.write(result)
