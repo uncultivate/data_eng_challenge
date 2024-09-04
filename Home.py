@@ -85,7 +85,7 @@ The challenge submission will close on Thursday, 05/09 at 11:59 PM AEST. The gam
 
 # Countdown timer
 aest = timezone('Australia/Sydney')
-submission_close_date = aest.localize(datetime.datetime(2024, 9, 12, 23, 59, 59))
+submission_close_date = aest.localize(datetime.datetime(2024, 9, 5, 23, 59, 59))
 current_time = datetime.datetime.now(aest)
 remaining_time = submission_close_date - current_time
 
