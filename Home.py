@@ -92,7 +92,11 @@ remaining_time = submission_close_date - current_time
 st.sidebar.title("ABS Data Eng")
 st.sidebar.header("Coding Challenge #3")
 if remaining_time.total_seconds() > 0:
-    st.sidebar.write(f"Submissions close in {remaining_time.days} days, {remaining_time.seconds // 3600} hours and "
+    if remaining_time.days == 1:
+        st.sidebar.write(f"Submissions close in {remaining_time.days} day, {remaining_time.seconds // 3600} hours and "
+                     f"{(remaining_time.seconds // 60) % 60} minutes.")
+    else:
+        st.sidebar.write(f"Submissions close in {remaining_time.days} days, {remaining_time.seconds // 3600} hours and "
                      f"{(remaining_time.seconds // 60) % 60} minutes.")
 else:
     st.sidebar.write("Submissions Closed")
