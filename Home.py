@@ -67,7 +67,6 @@ st.subheader("Challenge Details")
 "6. Detection Radius: Engineers have full visibility over the office (the game board) and are given the positions of themselves, plus all the other engineers and beast/zombies. The beast and any zombies have a detection radius of 5, calculated using the Euclidean distance between entities"
 
 st.subheader("Function Requirements")
-st.write("1. Parameters: Your function will receive the following inputs:") 
 st.write("1. Parameters: Your function will receive the following inputs:")
 st.markdown("""
 - `self_pos` (Position): The current position of Alice on the grid, represented as a tuple (x, y).
@@ -75,7 +74,6 @@ st.markdown("""
 - `other_engineers` (List[Position]): A list of tuples, each representing the position of another engineer (x, y). This list may be empty if no other engineers are present.
 - `grid_size` (Tuple[int, int]): A tuple representing the dimensions of the grid (width, height).
 """)
-st.write("2. Suggested logic:")
 st.write("2. Suggested logic:")
 st.markdown("""
 - Step 1: Code a helper function to determine if a move is valid (i.e. always within the grid boundaries)
