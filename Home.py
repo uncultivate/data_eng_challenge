@@ -50,19 +50,22 @@ st.write("""
 
 st.image('assets/img/beast.jpg', width=600)
 st.write("A huge beast has escaped from confinement by Home Affairs on level 3 to wreak havoc and now stalks the terrified data engineer team as they weigh up their options. Taking on the beast single-handed is not an option. Can they evade the beast until it loses interest and leaves? Will it leave once its hunger is satiated?")
+st.sidebar.divider()
 
 st.audio("assets/audio/monster_hunt_deep_dive.wav", format="audio/wav", autoplay=False)
 
-st.subheader("Enjoy this deep dive into the Data Engineers' Challenge and The Beast from 3 East!")
+st.write("The Beast from 3 East Featured on the Deep Dive Podcast")
+st.sidebar.divider()
+
 
 
 st.subheader("Challenge Details")
 #url = "https://github.com/uncultivate/elevator-master"
-st.write("1. Game grid: The challenge will take place on a grid of size (width * height), given as a tuple of ints.")
+st.write("1. Game grid: The challenge will take place on a grid of size (width * height), given as a tuple of integers.")
 #st.write("2. Movement: Simulation: Contestants should first access and run the [elevator simulation code repo](%s). This repo contains code to generate simulated building entries & exits, as well as simulation code to run your function, and visualise results" % url)
-st.write("2: Entities: Each data engineer will be represented by an emoji on the game board that bears their name and follows their function's logic. The beast will be represented by a 👹 emoji. If the beast reaches the same grid space as an engineer, they will become a zombie, represented by a 🧟 emoji, and the entity logic will follow that of the beast.")
-st.write("3: Objective: Survive as long as possible! The game will continue until a pre-determined time limit, OR until there is only 1 engineer remaining.")
-st.write("4: Scoring: The challenge will be played a total of three times to ensure that results are not determined entirely by luck! The first engineer to become a zombie will receive 1 point, the second will receive 2 and so on. Any engineers remaining at end game will receive a bonus 3 points.")
+st.write("2. Entities: Each data engineer will be represented by an emoji on the game board that bears their name and follows their function's logic. The beast will be represented by a 👹 emoji. If the beast reaches the same grid space as an engineer, they will become a zombie, represented by a 🧟 emoji, and the entity logic will follow that of the beast.")
+st.write("3. Objective: Survive as long as possible! The game will continue until a pre-determined time limit, OR until there is only 1 engineer remaining.")
+st.write("4. Scoring: The challenge will be played a total of three times to ensure that results are not determined entirely by luck! The first engineer to become a zombie will receive 1 point, the second will receive 2 and so on. Any engineers remaining at end game will receive a bonus 3 points.")
 st.write("5. Movement: The challenge is turn based with each engineer able to move one grid-space per turn (up, down, left, right). The beast will start slow but gradually pick up the pace and will eventually move one EXTRA space every five turns. Zombies move slower, moving once every two turns. Note: Multiple entities may occupy the same space at once")
 st.write("6. Detection Radius: Engineers have full visibility over the office (the game board) and are given the positions of themselves, plus all the other engineers and beast/zombies. The beast and any zombies have a detection radius of 5, calculated using the Euclidean distance between entities")
 
