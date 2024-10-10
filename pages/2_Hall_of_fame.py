@@ -2,7 +2,7 @@ import streamlit as st
 st.set_page_config(page_title="Hall of Fame", page_icon="🏆")
 
 st.markdown("# Hall of Fame")
-st.markdown("### #3: The Beast from 3 East")
+st.markdown("### #4: The Beast from 3 East")
 st.markdown("#### 🥇 ?")
 st.markdown("#### 🥈 ?")
 st.markdown("#### 🥉 ?")
