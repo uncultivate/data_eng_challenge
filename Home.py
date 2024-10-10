@@ -39,6 +39,7 @@ sh = gc.open("Submissions")
 # Change the int depending on what month the competition is up to
 worksheet = sh.get_worksheet(3)
 entrants = worksheet.col_values(1)
+emojis = worksheet.col_values(4)
 st.session_state.entrants = entrants
 
 st.header("Data Engineers' Coding Challenge #4")
@@ -163,6 +164,7 @@ placeholder1 = """def engineer_ai(self_pos: Position, beast_positions: List[Posi
 if remaining_time.total_seconds() > 0:
     st.subheader("Submit your code")
     name = st.text_input("Name", placeholder="Keep it short and sweet")
+    emoji = st.text_input("Emoji", placeholder="Paste your emoji here")
     email = st.text_input("Email (optional)", help="Get notified of new challenges and get invited to results livestreams")
     function_code = st.text_area("Function Code (Paste your Python code here)", placeholder=placeholder1)
 
@@ -170,6 +172,7 @@ if remaining_time.total_seconds() > 0:
         if name and function_code:
             num_entrants = len(st.session_state.entrants)
             worksheet.update_cell(num_entrants + 1, 1, name)
+            worksheet.update_cell(num_entrants + 1, 4, emoji)
             if email:
                 worksheet.update_cell(num_entrants + 1, 2, email)
             worksheet.update_cell(num_entrants + 1, 3, function_code)
@@ -184,8 +187,8 @@ else:
 # Display current entrants
 st.sidebar.divider()
 st.sidebar.header("Current Entrants")
-for entrant in st.session_state.entrants:
-    st.sidebar.write(f"- {entrant}")
+for entrant, emoji in zip(st.session_state.entrants, st.session_state.emojis):
+    st.sidebar.write(f"- {emoji} {entrant}")
 
 # Contact
 st.sidebar.divider()
