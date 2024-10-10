@@ -84,7 +84,7 @@ st.markdown("""
 
 st.write("3. Returns:")
 st.markdown("""
-- Direction: The direction in which Alice should move. The possible directions are:
+- Direction: The direction in which the engineer should move. The possible directions are:
   - 'up' (move to the position above)
   - 'right' (move to the right)
   - 'down' (move to the position below)
@@ -92,6 +92,15 @@ st.markdown("""
   - None (stay in place if no valid move or no need to move)
 """)
 
+with open("assets/code/test.py", "r") as file:
+    test_code = file.read()
+    
+st.download_button(
+    label="Download test code",
+    data=test_code,
+    file_name="test.py",
+    mime="text/plain"
+)
 
 
 st.subheader("Submission Template")
