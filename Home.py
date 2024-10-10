@@ -41,7 +41,8 @@ worksheet = sh.get_worksheet(3)
 entrants = worksheet.col_values(1)
 st.session_state.entrants = entrants
 
-st.title("Data Engineers' Coding Challenge #4: The Beast from 3 East")
+st.header("Data Engineers' Coding Challenge #4")
+st.title("The Beast from 3 East")
 
 # Challenge description
 st.write("""
