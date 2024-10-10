@@ -44,13 +44,11 @@ st.session_state.entrants = entrants
 st.title("Data Engineers' Coding Challenge #4: The Beast from 3 East")
 
 # Challenge description
-c1, c2 = st.columns(2)
-with c1:
-    st.write("""
+st.write("""
     It is late in the ABS Canberra Office one Friday evening, where the Data Engineers are all working overtime. Suddenly, the power goes out and there is a crash as a large shape crashes through the glass door of the skybridge.   
 """)
-with c2:
-    st.image('assets/img/beast.jpg', width=600)
+
+st.image('assets/img/beast.jpg', width=600)
 st.write("A huge beast has escaped from confinement by Home Affairs on level 3 to wreak havoc and now stalks the terrified data engineer team as they weigh up their options. Taking on the beast single-handed is not an option. Can they evade the beast until it loses interest and leaves? Will it leave once its hunger is satiated?")
 
 st.audio("assets/audio/monster_hunt_deep_dive.wav", format="audio/wav", autoplay=False)
