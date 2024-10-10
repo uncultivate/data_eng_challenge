@@ -50,17 +50,15 @@ st.write("""
 
 st.image('assets/img/beast.jpg', width=704)
 st.write("A huge beast has escaped from confinement by Home Affairs on level 3 to wreak havoc and now stalks the terrified data engineer team as they weigh up their options. Taking on the beast single-handed is not an option. Can they evade the beast until it loses interest and leaves? Will it leave once its hunger is satiated?")
-st.sidebar.divider()
-
+st.divider()
 st.audio("assets/audio/monster_hunt_deep_dive.wav", format="audio/wav", autoplay=False)
-
-st.write("The Beast from 3 East Featured on the Deep Dive Podcast")
-st.sidebar.divider()
+url = "https://notebooklm.google.com/"
+st.write("The Beast from 3 East featured on the [Deep Dive Podcast](%s)" %url)
+st.divider()
 
 
 
 st.subheader("Challenge Details")
-#url = "https://github.com/uncultivate/elevator-master"
 "1. Game grid: The challenge will take place on a grid of size (width * height), given as a tuple of integers."
 "2. Entities: Each data engineer will be represented by an emoji on the game board that bears their name and follows their function's logic. The beast will be represented by a 👹 emoji. If the beast reaches the same grid space as an engineer, they will become a zombie, represented by a 🧟 emoji, and the entity logic will follow that of the beast."
 "3. Objective: Survive as long as possible! The game will continue until a pre-determined time limit, OR until there is only 1 engineer remaining."
@@ -70,23 +68,31 @@ st.subheader("Challenge Details")
 
 st.subheader("Function Requirements")
 st.write("1. Parameters: Your function will receive the following inputs:") 
-st.write("""  - self_pos (Position): The current position of Alice on the grid, represented as a tuple (x, y).
-              - beast_positions (List[Position]): A list of tuples, each representing the position of a beast/zombie (x, y). The position of the beast is always at the first index position in the list. 
-              - other_engineers (List[Position]): A list of tuples, each representing the position of another engineer (x, y). This list may be empty if no other engineers are present.
-              - grid_size (Tuple[int, int]): A tuple representing the dimensions of the grid (width, height).""")
+st.write("1. Parameters: Your function will receive the following inputs:")
+st.markdown("""
+- `self_pos` (Position): The current position of Alice on the grid, represented as a tuple (x, y).
+- `beast_positions` (List[Position]): A list of tuples, each representing the position of a beast/zombie (x, y). The position of the beast is always at the first index position in the list. 
+- `other_engineers` (List[Position]): A list of tuples, each representing the position of another engineer (x, y). This list may be empty if no other engineers are present.
+- `grid_size` (Tuple[int, int]): A tuple representing the dimensions of the grid (width, height).
+""")
 st.write("2. Suggested logic:")
-st.write("""  - Step 1: Code a helper function to determine if a move is valid (i.e. always within the grid boundaries)
-              - Step 2: Implement logic to move your engineer away from the beast/zombies
-              - Step 3 (Optional): Consider how you could use the positions of other engineers to your advantage
-         """)
+st.write("2. Suggested logic:")
+st.markdown("""
+- Step 1: Code a helper function to determine if a move is valid (i.e. always within the grid boundaries)
+- Step 2: Implement logic to move your engineer away from the beast/zombies
+- Step 3 (Optional): Consider how you could use the positions of other engineers to your advantage
+""")
 
 st.write("3. Returns:")
-st.write("""Direction: The direction in which Alice should move. The possible directions are:
-                   - 'up' (move to the position above),
-                   - 'right' (move to the right),
-                   - 'down' (move to the position below),
-                   - 'left' (move to the left),
-                   - None (stay in place if no valid move or no need to move).""")
+st.markdown("""
+- Direction: The direction in which Alice should move. The possible directions are:
+  - 'up' (move to the position above)
+  - 'right' (move to the right)
+  - 'down' (move to the position below)
+  - 'left' (move to the left)
+  - None (stay in place if no valid move or no need to move)
+""")
+
 
 
 st.subheader("Submission Template")
@@ -104,15 +110,27 @@ def engineer_ai(self_pos: Position, beast_positions: List[Position], other_engin
     return direction"""
 st.code(code, language='python')
 
-st.write("""Your task is to write a Python function that meets the specified requirements. 
-The challenge submission will close on Thursday, 05/09 at 11:59 PM AEST. The game will be run and broadcast on Teams on Friday, 06/09 at 3 PM AEST. Good luck!
-""")
-
+# Define challenge dates
 # Countdown timer
+
 aest = timezone('Australia/Sydney')
 submission_close_date = aest.localize(datetime.datetime(2024, 10, 24, 23, 59, 59))
+submission_run_date = aest.localize(datetime.datetime(2024, 10, 25, 15, 0, 0))
+
 current_time = datetime.datetime.now(aest)
 remaining_time = submission_close_date - current_time
+
+# Format dates for display
+close_date_str = submission_close_date.strftime("%A, %d/%m at %I:%M %p ADST")
+run_date_str = submission_run_date.strftime("%A, %d/%m at %I:%M %p ADST")
+
+st.write(f"""Your task is to write a Python function that meets the specified requirements. 
+
+The challenge submission will close on {close_date_str}. The game will be run and broadcast on Teams on {run_date_str}. Good luck!
+""")
+
+
+
 
 st.sidebar.title("ABS Data Eng")
 st.sidebar.header("Coding Challenge #4")
@@ -136,7 +154,7 @@ placeholder1 = """def engineer_ai(self_pos: Position, beast_positions: List[Posi
 
 if remaining_time.total_seconds() > 0:
     st.subheader("Submit your code")
-    name = st.text_input("Name")
+    name = st.text_input("Name", placeholder="Short and sweet please!")
     email = st.text_input("Email (optional)", help="Get notified of new challenges and get invited to results livestreams")
     function_code = st.text_area("Function Code (Paste your Python code here)", placeholder=placeholder1)
 
