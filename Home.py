@@ -78,6 +78,7 @@ st.write("""  - Step 1: Code a helper function to determine if a move is valid (
               - Step 2: Implement logic to move your engineer away from the beast/zombies
               - Step 3 (Optional): Consider how you could use the positions of other engineers to your advantage
          """)
+         
 st.write("3. Returns:")
 st.write("""Direction: The direction in which Alice should move. The possible directions are:
                    - 'up' (move to the position above),
