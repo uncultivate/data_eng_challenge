@@ -68,7 +68,7 @@ st.subheader("Challenge Details")
 "3. Objective: Survive as long as possible! The game will continue until a pre-determined time limit, OR until there is only 1 engineer remaining."
 "4. Scoring: The challenge will be played a total of three times to ensure that results are not determined entirely by luck! The first engineer to become a zombie will receive 1 point, the second will receive 2 and so on. Any engineers remaining at end game will receive a bonus 3 points."
 "5. Movement: The challenge is turn based with each engineer able to move one grid-space per turn (up, down, left, right). The beast will start slow but gradually pick up the pace and will eventually move one EXTRA space every five turns. Zombies move slower, moving once every two turns. Note: Multiple entities may occupy the same space at once"
-"6. Detection Radius: Engineers have full visibility over the office (the game board) and are given the positions of themselves, plus all the other engineers and beast/zombies. The beast and any zombies have a detection radius of 5, calculated using the Euclidean distance between entities"
+"6. Detection Radius: Engineers have full visibility over the office (the game board) and are given the positions of themselves, plus all the other engineers and beast/zombies. The beast and any zombies have a detection radius of 5, calculated using the Euclidean distance between entities. NB: If there is more than one engineer inside their detection radius, the beast/zombies will target the most recent entry into this space."
 
 st.subheader("Function Requirements")
 st.write("1. Parameters: Your function will receive the following inputs:")
