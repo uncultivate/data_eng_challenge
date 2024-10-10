@@ -48,7 +48,7 @@ st.write("""
     It is late in the ABS Canberra Office one Friday evening, where the Data Engineers are all working overtime. Suddenly, the power goes out and there is a crash as a large shape crashes through the glass door of the skybridge.   
 """)
 
-st.image('assets/img/beast.jpg', width=600)
+st.image('assets/img/beast.jpg', width=704)
 st.write("A huge beast has escaped from confinement by Home Affairs on level 3 to wreak havoc and now stalks the terrified data engineer team as they weigh up their options. Taking on the beast single-handed is not an option. Can they evade the beast until it loses interest and leaves? Will it leave once its hunger is satiated?")
 st.sidebar.divider()
 
