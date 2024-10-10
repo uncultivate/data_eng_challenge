@@ -53,7 +53,8 @@ with c2:
     st.image('assets/img/beast.jpg', width=600)
 st.write("A huge beast has escaped from confinement by Home Affairs on level 3 to wreak havoc and now stalks the terrified data engineer team as they weigh up their options. Taking on the beast single-handed is not an option. Can they evade the beast until it loses interest and leaves? Will it leave once its hunger is satiated?")
 
-st.audio("assets\audio\monster_hunt_deep_dive.wav", format="audio/wav", autoplay=False)
+st.audio("assets/audio/monster_hunt_deep_dive.wav", format="audio/wav", autoplay=False)
+
 st.subheader("Enjoy this deep dive into the Data Engineers' Challenge and The Beast from 3 East!")
 
 
