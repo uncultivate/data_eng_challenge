@@ -95,6 +95,9 @@ st.markdown("""
   - None (stay in place if no valid move or no need to move)
 """)
 
+st.subheader("Download Test Code")
+st.write("Note: This is a simplified simulation for testing your function and not representative of final logic and graphics.")
+
 with open("assets/code/test.py", "r") as file:
     test_code = file.read()
     
