@@ -41,6 +41,8 @@ worksheet = sh.get_worksheet(3)
 entrants = worksheet.col_values(1)
 emojis = worksheet.col_values(4)
 st.session_state.entrants = entrants
+st.session_state.emojis = emojis
+
 
 st.header("Data Engineers' Coding Challenge #4")
 st.title("The Beast from 3 East")
