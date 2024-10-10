@@ -162,7 +162,7 @@ placeholder1 = """def engineer_ai(self_pos: Position, beast_positions: List[Posi
 
 if remaining_time.total_seconds() > 0:
     st.subheader("Submit your code")
-    name = st.text_input("Name", placeholder="Short and sweet please!")
+    name = st.text_input("Name", placeholder="Keep it short and sweet")
     email = st.text_input("Email (optional)", help="Get notified of new challenges and get invited to results livestreams")
     function_code = st.text_area("Function Code (Paste your Python code here)", placeholder=placeholder1)
 
