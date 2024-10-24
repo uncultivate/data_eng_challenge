@@ -193,7 +193,7 @@ else:
 st.sidebar.divider()
 st.sidebar.header("Current Entrants")
 for entrant, emoji in zip(st.session_state.entrants, st.session_state.emojis):
-    st.sidebar.markdown(f"<div style='font-size: 24px'>- {emoji} {entrant}</div>", unsafe_allow_html=True)
+    st.sidebar.markdown(f"<div style='font-size: 24px'>- {emoji}</div> <div style='font-size: 16px'>{entrant}</div>", unsafe_allow_html=True)
 # Contact
 st.sidebar.divider()
 st.sidebar.header("Contact")
