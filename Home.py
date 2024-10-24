@@ -193,8 +193,7 @@ else:
 st.sidebar.divider()
 st.sidebar.header("Current Entrants")
 for entrant, emoji in zip(st.session_state.entrants, st.session_state.emojis):
-    st.sidebar.write(f"- {emoji} {entrant}")
-
+    st.sidebar.write(f"### - {emoji} {entrant}")
 # Contact
 st.sidebar.divider()
 st.sidebar.header("Contact")
