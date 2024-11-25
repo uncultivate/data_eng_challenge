@@ -117,7 +117,7 @@ Your gifter has access to:
 """)
 
 st.subheader("Access code repo")
-st.write("Note: This is a simplified simulation for testing your function and not representative of final logic and graphics.")
+st.write("Highly recommended to check this out before submitting. Contains the full game code and example classes.")
 
     
 repo_url = "https://github.com/uncultivate/regifting"
@@ -139,9 +139,9 @@ remaining_time = submission_close_date - current_time
 close_date_str = submission_close_date.strftime("%A, %d/%m at %I:%M %p ADST")
 run_date_str = submission_run_date.strftime("%A, %d/%m at %I:%M %p ADST")
 
-st.write(f"""Your task is to write a Python function that meets the specified requirements. 
+st.divider()
 
-The challenge submission will close on {close_date_str}. The game will be run and broadcast on Teams on {run_date_str}. Good luck!
+st.write(f"""The challenge submission will close on {close_date_str}. The game will be run and broadcast on Teams on {run_date_str}. Good luck!
 """)
 
 
@@ -191,7 +191,7 @@ placeholder1 = '''class YourGifter(Gifter):
 
 if remaining_time.total_seconds() > 0:
     st.subheader("Submit your code")
-    name = st.text_input("Name", placeholder="Keep it short and sweet")
+    name = st.text_input("Name", placeholder="Enter your name")
     emoji = st.text_input("Emoji", placeholder="Paste your emoji here")
     email = st.text_input("Email (optional)", help="Get notified of new challenges and get invited to results livestreams")
     function_code = st.text_area("Function Code (Paste your Python code here)", placeholder=placeholder1)
