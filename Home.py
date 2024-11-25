@@ -37,99 +37,100 @@ credentials = ServiceAccountCredentials.from_json_keyfile_dict(credentials_info)
 gc = gspread.authorize(credentials)
 sh = gc.open("Submissions")
 # Change the int depending on what month the competition is up to
-worksheet = sh.get_worksheet(3)
+worksheet = sh.get_worksheet(4)
 entrants = worksheet.col_values(1)
 emojis = worksheet.col_values(4)
 st.session_state.entrants = entrants
 st.session_state.emojis = emojis
 
 
-st.header("Data Engineers' Coding Challenge #4")
-st.title("The Beast from 3 East")
+st.header("Data Engineers' Coding Challenge #5")
+st.title("The Regifting Challenge")
 
 # Challenge description
 st.write("""
-    It is late in the ABS Canberra Office one Friday evening, where the Data Engineers are all working overtime. Suddenly, the power goes out and there is a crash as a large shape crashes through the glass door of the skybridge.   
+    It is late in the ABS Office on Christmas Eve, where the Data Engineers are all working overtime. Suddenly, there is a crash as a large brown sack crashes through the window and onto the office floor.   
 """)
 
-st.image('assets/img/beast.jpg')
-st.write("A huge beast has escaped from confinement by Home Affairs on level 3 to wreak havoc and now stalks the terrified data engineer team as they weigh up their options. Taking on the beast single-handed is not an option. Can they evade the beast until it loses interest and leaves? Will it leave once its hunger is satiated?")
+st.image('assets/img/sack.jpg')
+st.write("The director tentatively approaches the sack and unlooses the cord. Gifts of all shapes and sizes spill out, the wrapping paper sparkling and colourful. One engineer looks sidewards - 'I take it these don't need to be entered on the departmental gifts registry, right?'. Eyes turn to the director. 'Finders keepers I say! Let's divide up the gifts amongst ourselves. If you're not happy with my proposal, the next person will get a go. Merry Christmas everyone!'")
 st.divider()
-st.audio("assets/audio/monster_hunt_deep_dive.wav", format="audio/wav", autoplay=False)
+st.audio("assets/audio/regifting_deep_dive.wav", format="audio/wav", autoplay=False)
 url = "https://notebooklm.google.com/"
-st.write("The Beast from 3 East featured on the [Deep Dive Podcast](%s)" %url)
+st.write("The Regifting Challenge featured on the [Deep Dive Podcast](%s)" %url)
 st.divider()
 
 
 
 st.subheader("Challenge Details")
-"1. Game grid: The challenge will take place on a grid of size (width * height), given as a tuple of integers."
-"2. Entities: Each data engineer will be represented by an emoji on the game board that bears their name and follows their function's logic. The beast will be represented by a 👹 emoji. If the beast reaches the same grid space as an engineer, they will become a zombie, represented by a 🧟 emoji, and the entity logic will follow that of the beast."
-"3. Objective: Survive as long as possible! The game will continue until a pre-determined time limit, OR until there is only 1 engineer remaining."
-"4. Scoring: The challenge will be played a total of three times to ensure that results are not determined entirely by luck! The first engineer to become a zombie will receive 1 point, the second will receive 2 and so on. Any engineers remaining at end game will receive a bonus 3 points."
-"5. Movement: The challenge is turn based with each engineer able to move one grid-space per turn (up, down, left, right). The beast will start slow but gradually pick up the pace and will eventually move one EXTRA space every five turns. Zombies move slower, moving once every two turns. Note: Multiple entities may occupy the same space at once"
-"6. Detection Radius: Engineers have full visibility over the office (the game board) and are given the positions of themselves, plus all the other engineers and beast/zombies. The beast and any zombies have a detection radius of 5, calculated using the Euclidean distance between entities. NB: If there is more than one engineer inside their detection radius, the beast/zombies will target the most recent entry into this space."
+"The Regifting Challenge is a Python implementation of a multiplayer gift distribution game where players propose and vote on how to distribute gifts. The game explores different strategic approaches to resource allocation and voting behaviour."
+"""1. What is a round? Rounds consist of two parts:
+    - Proposed distribution of 100 gifts by the director
+    - Voting on the proposed distribution
+"""
+"2. Hierarchy: Each round has a director who proposes how to distribute 100 presents among all players. All players will have the chance to start as director, which means the number of rounds will be equal to the number of challenge entrants. The order of the other players is shuffled each round."
+"3. Voting: All players (including the director) vote on the proposed distribution. The director holds the casting vote."
+"4. Outcome: If majority accepts (≥50%), the distribution is implemented. If rejected, the director is eliminated (gets 0 presents) and the next player becomes director."
+"""5. Game continues until either:
+    - A distribution is accepted
+    - Only one player remains (who gets all presents)"""
 
-st.subheader("Function Requirements")
-st.write("1. Parameters: Your function will receive the following inputs:")
+
+st.subheader("Class Requirements")
+st.write("1. Every gifter class must inherit from the base Gifter class and implement two methods:")
+code = '''class YourGifter(Gifter):
+    def propose_distribution(self, num_gifts: int, num_gifters: int) -> list:
+        """
+        Create a proposed distribution of gifts. To be used when YOU are the director.
+        
+        Args:
+            num_gifts: Total number of gifts to distribute
+            num_gifters: Number of players still in the game
+            
+        Returns:
+            list: Proposed distribution where index represents player position 
+                 (0 is self, 1 is next player, etc.)
+        """
+        pass
+
+    def vote(self, distribution: list, num_gifts: int, num_gifters: int) -> bool:
+        """
+        Vote on a proposed distribution.
+        
+        Args:
+            distribution: Proposed distribution of gifts
+            num_gifts: Total number of gifts
+            num_gifters: Number of players still in game
+            
+        Returns:
+            bool: True to accept, False to reject
+        """
+        pass
+'''
+st.code(code, language='python')
+
+### Important Properties
 st.markdown("""
-- `self_pos` (Position): The current position of Alice on the grid, represented as a tuple (x, y).
-- `beast_positions` (List[Position]): A list of tuples, each representing the position of a beast/zombie (x, y). The position of the beast is always at the first index position in the list. 
-- `other_engineers` (List[Position]): A list of tuples, each representing the position of another engineer (x, y). This list may be empty if no other engineers are present.
-- `grid_size` (Tuple[int, int]): A tuple representing the dimensions of the grid (width, height).
-""")
-st.write("2. Suggested logic:")
-st.markdown("""
-- Step 1: Code a helper function to determine if a move is valid (i.e. always within the grid boundaries)
-- Step 2: Implement logic to move your engineer away from the beast/zombies
-- Step 3 (Optional): Consider how you could use the positions of other engineers to your advantage
+Your gifter has access to:
+- `self.name`: Your gifter's name (automatically assigned)
+- `self.seniority`: Current position in the game (0 = director, updates each round)
 """)
 
-st.write("3. Returns:")
-st.markdown("""
-- Direction: The direction in which the engineer should move. The possible directions are:
-  - 'up' (move to the position above)
-  - 'right' (move to the right)
-  - 'down' (move to the position below)
-  - 'left' (move to the left)
-  - None (stay in place if no valid move or no need to move)
-""")
-
-st.subheader("Download Test Code")
+st.subheader("Access code repo")
 st.write("Note: This is a simplified simulation for testing your function and not representative of final logic and graphics.")
 
-with open("assets/code/test.py", "r") as file:
-    test_code = file.read()
     
-st.download_button(
-    label="Download test code",
-    data=test_code,
-    file_name="test.py",
-    mime="text/plain"
-)
+repo_url = "https://github.com/uncultivate/regifting"
 
+st.link_button("Access code repo", repo_url)
 
-st.subheader("Submission Template")
-st.write("Below is a template you can use to create your function. Replace the placeholder logic with your strategy.")
-
-code = """
-Position = Tuple[int, int]
-Direction = Optional[str]
-
-def engineer_ai(self_pos: Position, beast_positions: List[Position], other_engineers: List[Position], grid_size: Tuple[int, int]) -> Direction:
-    # Implement movement logic here
-
-    # Or stumble blindly around the office...
-    direction = random.choice(['up', 'down', 'left', 'right'])
-    return direction"""
-st.code(code, language='python')
 
 # Define challenge dates
 # Countdown timer
 
 aest = timezone('Australia/Sydney')
-submission_close_date = aest.localize(datetime.datetime(2024, 10, 24, 23, 59, 59))
-submission_run_date = aest.localize(datetime.datetime(2024, 10, 25, 15, 0, 0))
+submission_close_date = aest.localize(datetime.datetime(2024, 12, 5, 23, 59, 59))
+submission_run_date = aest.localize(datetime.datetime(2024, 12, 6, 15, 0, 0))
 
 current_time = datetime.datetime.now(aest)
 remaining_time = submission_close_date - current_time
@@ -147,7 +148,7 @@ The challenge submission will close on {close_date_str}. The game will be run an
 
 
 st.sidebar.title("ABS Data Eng")
-st.sidebar.header("Coding Challenge #4")
+st.sidebar.header("Coding Challenge #5")
 if remaining_time.total_seconds() > 0:
     if remaining_time.days == 1:
         st.sidebar.write(f"Submissions close in {remaining_time.days} day, {remaining_time.seconds // 3600} hours and "
@@ -159,12 +160,34 @@ else:
     st.sidebar.write("Submissions Closed")
 
 # Submission form
-placeholder1 = """def engineer_ai(self_pos: Position, beast_positions: List[Position], other_engineers: List[Position], grid_size: Tuple[int, int]) -> Direction:
-    # Implement movement logic here
+placeholder1 = '''class YourGifter(Gifter):
+    def propose_distribution(self, num_gifts: int, num_gifters: int) -> list:
+        """
+        Create a proposed distribution of gifts. To be used when YOU are the director.
+        
+        Args:
+            num_gifts: Total number of gifts to distribute
+            num_gifters: Number of players still in the game
+            
+        Returns:
+            list: Proposed distribution where index represents player position 
+                 (0 is self, 1 is next player, etc.)
+        """
+        pass
 
-    # Or stumble blindly around the office...
-    direction = random.choice(['up', 'down', 'left', 'right'])
-    return direction"""
+    def vote(self, distribution: list, num_gifts: int, num_gifters: int) -> bool:
+        """
+        Vote on a proposed distribution.
+        
+        Args:
+            distribution: Proposed distribution of gifts
+            num_gifts: Total number of gifts
+            num_gifters: Number of players still in game
+            
+        Returns:
+            bool: True to accept, False to reject
+        """
+        pass'''
 
 if remaining_time.total_seconds() > 0:
     st.subheader("Submit your code")
