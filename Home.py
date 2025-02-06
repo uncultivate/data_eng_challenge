@@ -68,10 +68,10 @@ st.divider()
 st.subheader("Challenge Details")
 "The Data Engineers' Challenge #6 revolves around a game called the Dollar Auction. The auction will be contested by entrants who submit functions in Python containing bidding logic (either bid or pass)."
 """In the Dollar Auction game:
-    - A $1 coin is auctioned off
-    - Players can bid in increments of $0.05
+    - A \$1 coin is auctioned off
+    - Players can bid in increments of \$0.05
     - The highest bidder wins the dollar, but both the highest AND second-highest bidders must pay their bids
-    - Each player starts with $2
+    - Each player starts with \$2
     - There will be multiple dollar auctions occurring with different combinations of players
 """
 """You can create new bidding strategies by defining functions that take three parameters: 
