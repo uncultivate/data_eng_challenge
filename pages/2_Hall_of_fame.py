@@ -2,6 +2,11 @@ import streamlit as st
 st.set_page_config(page_title="Hall of Fame", page_icon="🏆")
 
 st.markdown("# Hall of Fame")
+st.markdown("### #6: The Regifting Challenge ([repo link](https://github.com/uncultivate/dollar-auction/))")
+st.markdown("#### 🥇 ???")
+st.markdown("#### 🥈 ???")
+st.markdown("#### 🥉 ???")
+st.divider()
 st.markdown("### #5: The Regifting Challenge ([repo link](https://github.com/uncultivate/regifting/))")
 st.markdown("#### 🥇 Avaricious Rapacity")
 st.markdown("#### 🥈 The Grinch")

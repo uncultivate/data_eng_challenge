@@ -37,90 +37,76 @@ credentials = ServiceAccountCredentials.from_json_keyfile_dict(credentials_info)
 gc = gspread.authorize(credentials)
 sh = gc.open("Submissions")
 # Change the int depending on what month the competition is up to
-worksheet = sh.get_worksheet(4)
+worksheet = sh.get_worksheet(5)
 entrants = worksheet.col_values(1)
 emojis = worksheet.col_values(4)
 st.session_state.entrants = entrants
 st.session_state.emojis = emojis
 
 
-st.header("Data Engineers' Coding Challenge #5")
-st.title("The Regifting Challenge")
+st.header("Data Engineers' Coding Challenge #6")
+st.title("Dollar Auction")
 
 # Challenge description
 st.write("""
-    It is late in the ABS Office on Christmas Eve, where the Data Engineers are all working overtime. Suddenly, there is a crash as a large brown sack crashes through the window and onto the office floor.   
+    An exciting announcement appears one day in Newspoint: 'Dollar coins are being commissioned by the Mint to commemorate ANDII Release 1!' You read on. 'Unfortunately GIVING the coins to staff would breach APS values, but they will be auctioned off next Friday afternoon.'   
 """)
 
-st.image('assets/img/sack.jpg')
-st.write("The director tentatively approaches the sack and unlooses the cord. Gifts of all shapes and sizes spill out, the wrapping paper sparkling and colourful. One engineer looks sidewards - 'I take it these don't need to be entered on the departmental gifts registry, right?'. Eyes turn to the director. 'Finders keepers I say! Let's divide up the gifts amongst ourselves. If you're not happy with my proposal, the next person will get a go. Merry Christmas everyone!'")
+st.image('assets/img/dollar1.png')
+st.write("Welcome to the sixth iteration of the Data Engineers' Challenge. This month - we have the Dollar Auction game, a game theory experiment that demonstrates how rational decision-making can lead to seemingly irrational outcomes.")
+st.write("Difficulty: Easy")
+st.write("Coding Skills Required: Python, functions, pandas DataFrames, conditional statements")
+st.write("Other Skills: Strategic thinking and creative problem solving")
 st.divider()
-st.audio("assets/audio/regifting_deep_dive.wav", format="audio/wav", autoplay=False)
+st.audio("assets/audio/dollar_auction_deep_dive.wav", format="audio/wav", autoplay=False)
 url = "https://notebooklm.google.com/"
-st.write("The Regifting Challenge featured on the [Deep Dive Podcast](%s)" %url)
+st.write("Dollar Auction as featured on the [Deep Dive Podcast](%s)" %url)
 st.divider()
 
 
 
 st.subheader("Challenge Details")
-"The Regifting Challenge is a Python implementation of a multiplayer gift distribution game where players propose and vote on how to distribute gifts. The game explores different strategic approaches to resource allocation and voting behaviour."
-"""1. What is a round? Rounds consist of two parts:
-    - Proposed distribution of 100 gifts by the director
-    - Voting on the proposed distribution
+"The Data Engineers' Challenge #6 revolves around a game called the Dollar Auction. The auction will be contested by entrants who submit functions in Python containing bidding logic (either bid or pass)."
+"""In the Dollar Auction game:
+    - A $1 coin is auctioned off
+    - Players can bid in increments of $0.05
+    - The highest bidder wins the dollar, but both the highest AND second-highest bidders must pay their bids
+    - Each player starts with $2
+    - There will be multiple dollar auctions occurring with different combinations of players
 """
-"2. Hierarchy: Each round has a director who proposes how to distribute 100 presents among all players. All players will have the chance to start as director, which means the number of rounds will be equal to the number of challenge entrants. The order of the other players is shuffled each round."
-"3. Voting: All players (including the director) vote on the proposed distribution. The director holds the casting vote."
-"4. Outcome: If majority accepts (≥50%), the distribution is implemented. If rejected, the director is eliminated (gets 0 presents) and the next player becomes director."
-"""5. Game continues until either:
-    - A distribution is accepted
-    - Only one player remains (who gets all presents)"""
+"""You can create new bidding strategies by defining functions that take three parameters: 
+- num_players: Total number of players in the auction
+- bid_history: DataFrame containing previous bids with columns 'player' and 'bid'
+- money: Current amount of money available to the player
+"""
 
 
-st.subheader("Class Requirements")
-st.write("1. Every gifter class must inherit from the base Gifter class and implement two methods:")
-code = '''class YourGifter(Gifter):
-    def propose_distribution(self, num_gifts: int, num_gifters: int) -> list:
-        """
-        Create a proposed distribution of gifts. To be used when YOU are the director.
-        
-        Args:
-            num_gifts: Total number of gifts to distribute
-            num_gifters: Number of players still in the game
-            
-        Returns:
-            list: Proposed distribution where index represents player position 
-                 (0 is self, 1 is next player, etc.)
-        """
-        pass
+st.subheader("Function Requirements")
+st.write("Example Strategy:")
+code = '''
+    def my_strategy(num_players, bid_history, money):
+        import x, y, z # Import any packages you wish to use inside your function (submit early if non-standard)
+        current_bid = bid_history.iloc[-1]['bid']
+        if current_bid < 0.50: # Only bid if current bid is under 50 cents
+                return current_bid + 0.05
+        return False
 
-    def vote(self, distribution: list, num_gifts: int, num_gifters: int) -> bool:
-        """
-        Vote on a proposed distribution.
-        
-        Args:
-            distribution: Proposed distribution of gifts
-            num_gifts: Total number of gifts
-            num_gifters: Number of players still in game
-            
-        Returns:
-            bool: True to accept, False to reject
-        """
-        pass
 '''
 st.code(code, language='python')
 
 ### Important Properties
 st.markdown("""
-Your gifter has access to:
-- `self.name`: Your gifter's name (automatically assigned)
-- `self.seniority`: Current position in the game (0 = director, updates each round)
+Return values:
+- Return a float to place a bid (must be higher than current bid and a multiple of $0.05)
+- Return False to pass
+- Bids cannot exceed player's available money
 """)
 
 st.subheader("Access code repo")
 st.write("Highly recommended to check this out before submitting. Contains the full game code and example classes.")
 
     
-repo_url = "https://github.com/uncultivate/regifting"
+repo_url = "https://github.com/uncultivate/dollar-auction"
 
 st.link_button("Access code repo", repo_url)
 
@@ -129,8 +115,8 @@ st.link_button("Access code repo", repo_url)
 # Countdown timer
 
 aest = timezone('Australia/Sydney')
-submission_close_date = aest.localize(datetime.datetime(2024, 12, 5, 23, 59, 59))
-submission_run_date = aest.localize(datetime.datetime(2024, 12, 6, 15, 0, 0))
+submission_close_date = aest.localize(datetime.datetime(2025, 2, 13, 23, 59, 59))
+submission_run_date = aest.localize(datetime.datetime(2025, 2, 14, 15, 0, 0))
 
 current_time = datetime.datetime.now(aest)
 remaining_time = submission_close_date - current_time
@@ -148,7 +134,7 @@ st.write(f"""The challenge submission will close on {close_date_str}. The game w
 
 
 st.sidebar.title("ABS Data Eng")
-st.sidebar.header("Coding Challenge #5")
+st.sidebar.header("Coding Challenge #6")
 if remaining_time.total_seconds() > 0:
     if remaining_time.days == 1:
         st.sidebar.write(f"Submissions close in {remaining_time.days} day, {remaining_time.seconds // 3600} hours and "
@@ -160,34 +146,15 @@ else:
     st.sidebar.write("Submissions Closed")
 
 # Submission form
-placeholder1 = '''class YourGifter(Gifter):
-    def propose_distribution(self, num_gifts: int, num_gifters: int) -> list:
-        """
-        Create a proposed distribution of gifts. To be used when YOU are the director.
-        
-        Args:
-            num_gifts: Total number of gifts to distribute
-            num_gifters: Number of players still in the game
-            
-        Returns:
-            list: Proposed distribution where index represents player position 
-                 (0 is self, 1 is next player, etc.)
-        """
-        pass
+placeholder1 = '''
+    def my_strategy(num_players, bid_history, money):
+        import x, y, z # Import any packages you wish to use inside your function (submit early if non-standard)
+        current_bid = bid_history.iloc[-1]['bid']
+        if current_bid < 0.50: # Only bid if current bid is under 50 cents
+                return current_bid + 0.05
+        return False
 
-    def vote(self, distribution: list, num_gifts: int, num_gifters: int) -> bool:
-        """
-        Vote on a proposed distribution.
-        
-        Args:
-            distribution: Proposed distribution of gifts
-            num_gifts: Total number of gifts
-            num_gifters: Number of players still in game
-            
-        Returns:
-            bool: True to accept, False to reject
-        """
-        pass'''
+'''
 
 if remaining_time.total_seconds() > 0:
     st.subheader("Submit your code")
