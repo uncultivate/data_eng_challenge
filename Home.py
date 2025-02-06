@@ -122,8 +122,8 @@ current_time = datetime.datetime.now(aest)
 remaining_time = submission_close_date - current_time
 
 # Format dates for display
-close_date_str = submission_close_date.strftime("%A, %d/%m at %I:%M %p ADST")
-run_date_str = submission_run_date.strftime("%A, %d/%m at %I:%M %p ADST")
+close_date_str = submission_close_date.strftime("%A, %d/%m at %I:%M %p AEDT")
+run_date_str = submission_run_date.strftime("%A, %d/%m at %I:%M %p AEDT")
 
 st.divider()
 
