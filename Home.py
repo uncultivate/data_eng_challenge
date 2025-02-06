@@ -146,13 +146,12 @@ else:
     st.sidebar.write("Submissions Closed")
 
 # Submission form
-placeholder1 = '''
-    def my_strategy(num_players, bid_history, money):
-        import x, y, z # Import any packages you wish to use inside your function (submit early if non-standard)
-        current_bid = bid_history.iloc[-1]['bid']
-        if current_bid < 0.50: # Only bid if current bid is under 50 cents
-                return current_bid + 0.05
-        return False
+placeholder1 = '''def my_strategy(num_players, bid_history, money):
+    import x, y, z # Import any packages you wish to use inside your function (submit early if non-standard)
+    current_bid = bid_history.iloc[-1]['bid']
+    if current_bid < 0.50: # Only bid if current bid is under 50 cents
+        return current_bid + 0.05
+    return False
 
 '''
 
