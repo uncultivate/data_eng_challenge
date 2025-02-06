@@ -53,10 +53,10 @@ st.write("""
 """)
 
 st.image('assets/img/dollar1.png')
-st.write("Welcome to the sixth iteration of the Data Engineers' Challenge. This month - we have the Dollar Auction game, a game theory experiment that demonstrates how rational decision-making can lead to seemingly irrational outcomes.")
-st.write("Difficulty: Easy")
-st.write("Coding Skills Required: Python, functions, pandas DataFrames, conditional statements")
-st.write("Other Skills: Strategic thinking and creative problem solving")
+st.write("Welcome to the sixth iteration of the Data Engineers' Challenge! This month - we have the Dollar Auction game, a game theory experiment that demonstrates how rational decision-making can lead to seemingly irrational outcomes.")
+st.write("**Difficulty**: Easy")
+st.write("**Coding Skills Required**: Python, functions, pandas DataFrames, conditional statements")
+st.write("**Other Skills**: Strategic thinking and creative problem solving")
 st.divider()
 st.audio("assets/audio/dollar_auction_deep_dive.wav", format="audio/wav", autoplay=False)
 url = "https://notebooklm.google.com/"
