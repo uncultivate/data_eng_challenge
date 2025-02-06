@@ -159,7 +159,7 @@ if remaining_time.total_seconds() > 0:
     st.subheader("Submit your code")
     name = st.text_input("Name", placeholder="Enter your name")
     emoji = st.text_input("Emoji", placeholder="Paste your emoji here")
-    email = st.text_input("Email (optional)", help="Get notified of new challenges and get invited to results livestreams")
+    email = st.text_input("Email (optional: Be notified of and invited to future challenges)", help="Get notified of new challenges and get invited to results livestreams")
     function_code = st.text_area("Function Code (Paste your Python code here)", placeholder=placeholder1)
 
     if st.button("Submit"):
