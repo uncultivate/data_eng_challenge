@@ -4,7 +4,7 @@ st.set_page_config(page_title="Hall of Fame", page_icon="🏆")
 st.markdown("# Hall of Fame")
 st.markdown("### #6: The Regifting Challenge ([repo link](https://github.com/uncultivate/dollar-auction/))")
 st.markdown("#### 🥇 Not a morning strategy")
-st.markdown("#### 🥈 Sixbids None the Richer")
+st.markdown("#### 🥈 Sixbids None The Richer")
 st.markdown("#### 🥉 Low Risk")
 st.markdown("#### 🥉 reckless ryan")
 
