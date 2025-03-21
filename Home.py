@@ -908,10 +908,9 @@ else:
 # Display current entrants
 st.sidebar.divider()
 st.sidebar.header("Current Entrants")
-for entrant, emoji in zip(st.session_state.entrants, st.session_state.emojis):
+for entrant in zip(st.session_state.entrants):
     st.sidebar.markdown(
         f"<div style='display: flex; align-items: center; gap: 8px;'>"
-        f"<div style='font-size: 24px'>- {emoji}</div>"
         f"<div style='font-size: 16px'>{entrant}</div>"
         f"</div>", 
         unsafe_allow_html=True
