@@ -908,7 +908,7 @@ else:
 # Display current entrants
 st.sidebar.divider()
 st.sidebar.header("Current Entrants")
-for entrant in zip(st.session_state.entrants):
+for entrant in st.session_state.entrants:
     st.sidebar.markdown(
         f"<div style='display: flex; align-items: center; gap: 8px;'>"
         f"<div style='font-size: 16px'>{entrant}</div>"
