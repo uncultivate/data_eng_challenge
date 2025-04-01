@@ -802,6 +802,12 @@ st.subheader("Challenge Details")
 - You will be awarded points for each magic square found, as well as an efficiency bonus that rewards completing the challenge with fewer moves, and a completion bonus that rewards complete detection of all magic squares. 
 """
 
+st.write("**Test Your Solution**: You can test your function or play as a human at the [Macrodata Refinement Playground](https://mdr-main.vercel.app/). This interactive environment allows you to:")
+st.write("- Play manually using arrow keys to navigate and find magic squares")
+st.write("- Test your custom search strategy implementation")
+st.write("- Experiment with different board sizes and magic square quantities")
+st.write("- Enable logging to debug your search algorithm")
+st.write("- Compare your performance with other strategies")
 
 st.subheader("Function Requirements")
 st.write("Example Strategy:")
