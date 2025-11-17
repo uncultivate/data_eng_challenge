@@ -47,10 +47,13 @@ st.session_state.emojis = emojis
 st.header("Data Engineers' Coding Challenge #8")
 st.title("Scrooge's Bonus")
 
+
+
 st.write("""It's one year on from the events of A Christmas Carol. Spooked and chastened by the visits from the Ghosts, Scrooge's miserly behaviour has been tempered, but not extinguished. Old habits die hard! As Christmas approaches, Scrooge considers whether Christmas turkeys for Bob Cratchit and the other staff are worth the cost. Will this help improve productivity? Or will his employees take advantage of his generosity?
 """)
 st.write("""Meanwhile, Scrooge's staff are weighing up the situation from a different perspective. Will their hard work be rewarded with a succulent Christmas Turkey? Or will they be left to starve?
 """)
+st.image("assets/img/image.png", width=500)
 st.divider()
 st.write("Welcome to the eighth iteration of the Data Engineers' Challenge! This month - we have Scrooge's Bonus: a tribute to the classic tale - A Christmas Carol.")
 st.write("**Difficulty**: Easy")
