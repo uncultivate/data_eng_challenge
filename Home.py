@@ -102,8 +102,7 @@ def stingy_scrooge(history: pd.DataFrame) -> str:
 '''
 st.code(code, language='python')
 
-code = '''
-def opportunistic_employee(history: pd.DataFrame) -> str:
+code = '''def opportunistic_employee(history: pd.DataFrame) -> str:
     """Work hard only when the previous round included a turkey."""
     if history.empty:
         return "high"
@@ -158,7 +157,7 @@ st.write(f"""The challenge submission will close on {close_date_str}. The game w
 
 
 st.sidebar.title("ABS Data Eng")
-st.sidebar.header("Coding Challenge #7")
+st.sidebar.header("Coding Challenge #8")
 if remaining_time.total_seconds() > 0:
     if remaining_time.days == 1:
         st.sidebar.write(f"Submissions close in {remaining_time.days} day, {remaining_time.seconds // 3600} hours and "
