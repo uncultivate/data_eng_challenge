@@ -76,8 +76,19 @@ While the simplest form of the general gift-exchange game typically involves onl
 2. Employee's Move (The Reciprocation): Employees then individually decide whether to reciprocate the bonus choice with a higher level of effort (work harder) or a lower level of effort.
 This sequence continues for a number of rounds.
 
-The theory suggests that if Scrooge offers a higher salary, employees are more inclined to reciprocate with greater effort, leading to mutually beneficial outcomes. Reciprocity is a fundamental factor that shapes individuals' behavior in economic contexts, demonstrating that self-interest maximization is not the sole determinant of economic decision-making.
+The theory suggests that if Scrooge offers a higher salary, employees are more inclined to reciprocate with greater effort, leading to mutually beneficial outcomes. 
 """
+
+st.subheader("Scoring points")
+"""This game will award a 'Scrooge' winner and an 'employee' winner, based on the submissions that score the highest number of points over x number of rounds. 
+"""
+st.write("""Payoff Matrix (Scrooge, employee)
+
+- (turkey, high): (2, 2)
+- (turkey, low): (0, 3)
+- (no_turkey, high): (3, 0)
+- (no_turkey, low): (1, 1)
+""")
 
 st.subheader("Challenge Repo")
 st.write("You can find the challenge repo [here](https://github.com/uncultivate/xmas-bonus). Try the sample functions and write your own before submitting.")
